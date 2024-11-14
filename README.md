@@ -1,107 +1,107 @@
-Linux Bonding Script
+## Script de Enlace para Linux
 ====================
 
-This script is used to configure bonding on Linux machines, and to determine which interface groups (peers) are available for bonding.
+Este script se utiliza para configurar enlaces en máquinas Linux y para determinar qué grupos de interfaces (pares) están disponibles para el enlace.
 
-Features
+**Características**
 --------
 
-* Determination of interface groups (peers)
-* Configuration of interface bonding on Linux
+* Determinación de grupos de interfaces (pares)
+* Configuración de enlaces de interfaces en Linux
 
-Supported Operating Systems
+**Sistemas operativos compatibles**
 ---------------------------
 
-* Red Hat Enterprise Linux (Versions >= 5)
-* CentOS (Versions >= 5)
-* Fedora (Versions >= 10)
-* Debian (Versions >= 5)
-* Ubuntu (Versions >= 10.04)
+* Red Hat Enterprise Linux (Versiones >= 5)
+* CentOS (Versiones >= 5)
+* Fedora (Versiones >= 10)
+* Debian (Versiones >= 5)
+* Ubuntu (Versiones >= 10.04)
 
-Usage
+**Uso**
 -----
 
     $ python bonding.py --help
-    Usage:
+    Uso:
       bonding.py [--nopeers]
       bonding.py --onlypeers
       bonding.py --automated
       bonding.py --unattend --bond=BOND --ip=ADDR --netmask=MASK --iface=IFACE1 
                  --iface=IFACE2 [--iface=IFACE3 ...] [--gateway=GW] [--mode=MODE]
 
-    A script used to configure bonding on Linux machines, and to determine which
-    interface groups (peers) are available for bonding.
+    Un script utilizado para configurar enlaces en máquinas Linux y para determinar qué
+    grupos de interfaces (pares) están disponibles para el enlace.
     ------------------------------------------------------------------------------
     https://github.com/sivel/bonding
 
-    Options:
-      -h, --help           show this help message and exit
-      --version            Show the version number and exit
+    Opciones:
+      -h, --help           mostrar este mensaje de ayuda y salir
+      --version            Mostrar el número de versión y salir
 
-      Peers:
-        --onlypeers        Only run the peers portion of this utility, to identify
-                           bonded peer interfaces
-        --nopeers          Do not run the peers portion of this utility
-        --peerswait=SECS   The number of seconds to wait for switch port
-                           negotiation. Default 5
+      Pares:
+        --onlypeers        Solo ejecutar la parte de pares de esta utilidad, para identificar
+                           las interfaces pares enlazadas
+        --nopeers          No ejecutar la parte de pares de esta utilidad
+        --peerswait=SECS   El número de segundos para esperar la negociación del puerto del conmutador. Predeterminado 5
 
-      Unattended:
-        --automated        Whether to run this command automated, this is
-                           different from unattended which requires information
-                           about how to configure the bond. This option requires
-                           no additional options and will ignore them
-        --unattend         Whether to run this command unattended
-        --bond=BOND        The bonded master interface name. Required when using
+      Sin supervisión:
+        --automated        Si ejecutar este comando de forma automatizada, esto es
+                           diferente a sin supervisión, que requiere información
+                           sobre cómo configurar el enlace. Esta opción no requiere
+                           opciones adicionales y las ignorará
+        --unattend         Si ejecutar este comando sin supervisión
+        --bond=BOND        El nombre de la interfaz maestra enlazada. Requerido al utilizar
                            --unattend
-        --ip=IP            The IP address to use in the bond. Required when using
+        --ip=IP            La dirección IP a utilizar en el enlace. Requerido al utilizar
                            --unattend
-        --netmask=NETMASK  The Netmask to use in the bond. Required when using
+        --netmask=NETMASK  La máscara de red a utilizar en el enlace. Requerido al utilizar
                            --unattend
-        --iface=IFACE      The interfaces to be used in the bond, specify multiple
-                           times for multiple interfaces. Required when using
+        --iface=IFACE      Las interfaces a utilizar en el enlace, especifique varias veces
+                           para varias interfaces. Requerido al utilizar
                            --unattend
-        --gateway=GATEWAY  The default gateway to use for the system, if this is
-                           specified, the gateway and gateway dev will be updated.
-                           default: none
-        --mode=MODE        The bonding mode to be used. default: active-backup
+        --gateway=GATEWAY  La puerta de enlace predeterminada a utilizar para el sistema, si esto está
+                           especificado, se actualizarán la puerta de enlace y el dispositivo de puerta de enlace.
+                           predeterminado: ninguno
+        --mode=MODE        El modo de enlace a utilizar. predeterminado: activo-backup
 
-Exit Codes
+**Códigos de Salida**
 ----------
 
-### Generic
+### Genérico
 
-    1: Generic Error
-    2: Not all options provided for an unattended configuration
+    1: Error genérico
+    2: No se proporcionaron todas las opciones para una configuración sin supervisión
 
-### Automated
+### Automatizado
 
-    100: There are no interfaces that contain the default route
-    101: The gateway device is already a master/bonded interface
-    102: There is no IP Address configured on the device containing the default route.
-    103: There is no Network Mask configured on the device containing the default route.
-    104: Automated bonding will only work when there are exactly 2 peer interfaces, more than 2 found.
-    105: Interface is already part of a bond
+    100: No hay interfaces que contengan la ruta predeterminada
+    101: El dispositivo de puerta de enlace ya es una interfaz maestra/enlazada
+    102: No hay una dirección IP configurada en el dispositivo que contiene la ruta predeterminada.
+    103: No hay una máscara de red configurada en el dispositivo que contiene la ruta predeterminada.
+    104: El enlace automatizado solo funcionará cuando haya exactamente 2 interfaces pares, se encontraron más de 2.
+    105: La interfaz ya forma parte de un enlace
 
-### Operating System
+### Sistema operativo
 
-    200: OS Unsupported
-    201: Backup directory already exists
-    202: Red Hat Network Manager enabled
-    203: Debian ifenslave package is not installed or cannot be located
-    204: Interface(s) starting with __tmp exist, indicative of misconfigured network interfaces
+    200: SO no compatible
+    201: El directorio de copia de seguridad ya existe
+    202: Red Hat Network Manager habilitado
+    203: El paquete Debian ifenslave no está instalado o no se puede ubicar
+    204: Las interfaces que comienzan con __tmp existen, lo que indica que las interfaces de red están mal configuradas
 
-Bugs
+**Errores**
 ----
 
-Submit bugs, feature requests, etc as [Issues][1]
+Enviar errores, solicitudes de características, etc. como [Problemas][1]
 
-Contributing
+**Contribuyendo**
 ------------
 
-1. Fork it
-2. Branch it
-3. Commit it
-4. Push it
-5. Pull request it
+1. Haz un fork
+2. Crea una rama
+3. Haz un commit
+4. Pushea
+5. Haz una solicitud de pull
 
 [1]: https://github.com/sivel/bonding/issues
+
